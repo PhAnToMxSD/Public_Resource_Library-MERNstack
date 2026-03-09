@@ -1,0 +1,21 @@
+{
+  "name": "public_resource_library-mernstack",
+  "version": "1.0.0",
+  "description": "This is a public resource library where people can upload links/documents as resources, to help the community grow and learn from each other.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack/issues"
+  },
+  "homepage": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack#readme"
+}
