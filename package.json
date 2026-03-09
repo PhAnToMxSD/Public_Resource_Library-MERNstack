@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack/issues"
   },
-  "homepage": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack#readme"
+  "homepage": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack#readme",
+  "dependencies": {
+    "react": "^19.2.4"
+  }
 }
