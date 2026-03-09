@@ -1,10 +1,20 @@
 {
+  "dependencies": {
+    "firebase": "^12.10.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.1",
+    "react-scripts": "^5.0.1"
+  },
   "name": "public_resource_library-mernstack",
   "version": "1.0.0",
   "description": "This is a public resource library where people can upload links/documents as resources, to help the community grow and learn from each other.",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start:client": "react-scripts start",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -13,12 +23,20 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack/issues"
   },
-  "homepage": "https://github.com/PhAnToMxSD/Public_Resource_Library-MERNstack#readme",
-  "dependencies": {
-    "react": "^19.2.4"
+  "homepage": ".",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
