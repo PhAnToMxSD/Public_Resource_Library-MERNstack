@@ -23,8 +23,10 @@ export const Auth = () => {
     }
   };
 
+  const buttonColor = 'bg-sky-500 hover:bg-sky-700 rounded-lg';
+
   return (
-    <div className = "mx-auto flex max-w-sm items-center gap-x-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+    <div>
       <input
         type="email"
         placeholder="Email"
@@ -35,8 +37,12 @@ export const Auth = () => {
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={signUp}>Submit</button>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+      <button className={buttonColor} onClick={signUp}>
+        Click Me
+      </button>
+      <button className="bg-sky-500 hover:bg-sky-700 rounded-lg hover:border-sky-700" onClick={signInWithGoogle}>
+        Sign in with Google
+      </button>
     </div>
   );
 };

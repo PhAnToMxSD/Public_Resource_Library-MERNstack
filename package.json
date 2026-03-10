@@ -15,8 +15,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "start:client": "react-scripts start",
-    "build": "react-scripts build"
+    "start:client": "concurrently \"npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch\" \"react-scripts start\"",
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --minify",
+    "build": "npm run build:css && react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
