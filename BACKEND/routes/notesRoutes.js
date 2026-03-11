@@ -1,15 +1,14 @@
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+import express from "express";
+import { getAllNotes , changeNote , postNewNote , deleteNote} from "../controllers/notesControllers.js";
 
-app.put('/', (req, res) => {
-  res.send('Hello, World!');
-});
+const router = express.Router();
 
-app.post('/', (req, res) => {
-  res.send('Hello, World!');
-});
+router.get('/', getAllNotes);
 
-app.delete('/', (req, res) => {
-  res.send('Hello, World!');
-});
+router.put('/', changeNote);
+
+router.post('/', postNewNote);
+
+router.delete('/', deleteNote);
+
+export default router;
