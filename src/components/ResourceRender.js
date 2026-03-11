@@ -42,10 +42,11 @@ export const ResourceRender = () => {
 
   return (
     <div>
-      <ResourceAddition />
+      <ResourceAddition onResourceAdded={getResourceList} />
+      <hr style={{ border: "none", height: "14px", backgroundColor: "#2CD367", margin: "40px 0", width: "100vw" }} />
       <div>
         {resourceList.map((resource) => (
-          <div key={resource.id}>
+          <div key={resource.id} className="resource">
             <h2>{resource.title}</h2>
             <p>{resource.description}</p>
             <a href={resource.url} target="_blank" rel="noopener noreferrer">

@@ -2,7 +2,7 @@ import { db, auth } from "../config/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
 
-export const ResourceAddition = () => {
+export const ResourceAddition = ({ onResourceAdded }) => {
   const [_title, setTitle] = useState("");
   const [_description, setDescription] = useState("");
   const [_url, setUrl] = useState("");
@@ -31,26 +31,42 @@ export const ResourceAddition = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-row justify-center items-center gap-4">
       <input
         type="text"
+        className="inputauth"
         placeholder="Title of Resource..."
         value={_title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
+        className="inputauth"
         type="text"
         placeholder="Description of Resource..."
         value={_description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <input
+        className="inputauth"
         type="text"
         placeholder="URL of Resource..."
         value={_url}
         onChange={(e) => setUrl(e.target.value)}
       />
-      <button onClick={addResource}>Add Resource</button>
+      <button onClick={addResource} style={
+        {
+          border: "3px solid #2CD367",
+          backgroundColor: "transparent",
+          color: "#2CD367",
+          filter: "drop-shadow(0px 0px 8px green)",
+          fontFamily: '"Datatype", monospace',
+          fontSize: "20px",
+          fontWeight: 400,
+          fontStyle: "normal",
+          padding: "5px 20px",
+          cursor: "pointer"
+        }
+      }>Add Resource</button>
     </div>
   );
 };

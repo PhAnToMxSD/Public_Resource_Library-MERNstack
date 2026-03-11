@@ -5,6 +5,8 @@ import {
   signOut,
 } from "firebase/auth";
 
+import { ResourceAddition } from "./resourceAddition.js";
+
 export const Auth = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
@@ -28,7 +30,7 @@ export const Auth = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
-      <button className={isSignedIn ? "inputauthD" : "inputauthC"} onClick={isSignedIn ? logout : signInWithGoogle}>
+      <button className={isSignedIn ? "inputauthD" : "inputauthC"} onClick={isSignedIn ? () => { logout(); } : () => { signInWithGoogle(); }}>
         {isSignedIn ? "Logout" : "Sign in with Google"}
       </button>
     </div>

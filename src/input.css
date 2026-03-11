@@ -5,7 +5,7 @@
 }
 
 .inputauth {
-  @apply w-72 border-3 border-green-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 text-white transparent;
+  @apply w-72 border-3 border-green-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 text-white bg-transparent;
 }
 
 .inputauth::placeholder {
@@ -28,5 +28,8 @@
   @apply w-72 bg-green-500 hover:bg-green-900  text-black px-4 py-2 focus:outline-none focus:ring-2  focus:ring-green-500;
 }
 .inputauthD {
-  @apply w-72 bg-red-500 hover:bg-red-900  text-black px-4 py-2 focus:outline-none focus:ring-2  focus:ring-red-500;
+  @apply w-72 bg-red-500 hover:bg-red-900  text-black px-4 py-2  focus:outline-none focus:ring-2  focus:ring-red-500;
+}
+.resource{
+  @apply border-2 border-green-400 rounded-lg p-4 mb-4;
 }
