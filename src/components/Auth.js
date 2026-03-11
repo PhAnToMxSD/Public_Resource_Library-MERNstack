@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth, provider } from "../config/firebase.js";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
 
 
@@ -24,6 +24,14 @@ export const Auth = () => {
     }
   };
 
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const buttonColor = "bg-sky-500 hover:bg-sky-700 rounded-lg";
 
   return (
@@ -41,11 +49,14 @@ export const Auth = () => {
       <button className={buttonColor} onClick={signUp}>
         Click Me
       </button>
-      <button
+      <button id = "googleSignIn"
         className="bg-sky-500 hover:bg-sky-700 rounded-lg hover:border-sky-700"
-        onClick={signInWithGoogle}
+        onClick={() => {signInWithGoogle(); document.getElementById("googleSignIn").innerHTML="Signed In"}}
       >
         Sign in with Google
+      </button>
+      <button className={buttonColor} onClick={() => {logout(); document.getElementById("googleSignIn").innerHTML="Sign in with Google"}}>
+        Logout
       </button>
     </div>
   );

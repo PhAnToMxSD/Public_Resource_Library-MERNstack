@@ -1,6 +1,7 @@
-import { db } from "../config/firebase.js";
+import { db, auth } from "../config/firebase.js";
 import { getDocs, collection, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+
 
 export const ResourceRender = () => {
   const [resourceList, setResourceList] = useState([]);
@@ -31,6 +32,7 @@ export const ResourceRender = () => {
   }, []);
 
   const addResource = async () => {
+    if (!auth?.currentUser) return alert("Please sign in to add a resource");
     if (!_title) return alert("Untitled Resource");
     if (!_description) return alert("No description provided");
     if (!_url) return alert("No URL provided");
@@ -39,6 +41,7 @@ export const ResourceRender = () => {
         title: _title,
         description: _description,
         url: _url,
+        userId: auth?.currentUser?.uid,
       });
       setTitle("");
       setDescription("");
@@ -49,7 +52,9 @@ export const ResourceRender = () => {
     }
   };
 
-  const deleteResource = async (id) => {
+  const deleteResource = async (id, creatorId) => {
+    if (!auth?.currentUser) return alert("Please sign in to delete a resource");
+    if (auth.currentUser.uid !== creatorId) return alert("You can only delete resources you created");
     try {
         const resourceDoc = doc(db, "Resource", id);
         await deleteDoc(resourceDoc);
@@ -90,7 +95,7 @@ export const ResourceRender = () => {
             <a href={resource.url} target="_blank" rel="noopener noreferrer">
               {resource.url}
             </a>
-            <button onClick={() => deleteResource(resource.id)}>Delete</button>
+            <button onClick={() => deleteResource(resource.id, resource.userId)}>Delete</button>
           </div>
         ))}
       </div>
