@@ -1,14 +1,11 @@
 import { db, auth } from "../config/firebase.js";
 import { getDocs, collection, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { ResourceAddition } from "./resourceAddition.js";
 
 
 export const ResourceRender = () => {
   const [resourceList, setResourceList] = useState([]);
-
-  const [_title, setTitle] = useState("");
-  const [_description, setDescription] = useState("");
-  const [_url, setUrl] = useState("");
 
   const ResourceListREF = collection(db, "Resource");
 
@@ -31,27 +28,6 @@ export const ResourceRender = () => {
     getResourceList();
   }, []);
 
-  const addResource = async () => {
-    if (!auth?.currentUser) return alert("Please sign in to add a resource");
-    if (!_title) return alert("Untitled Resource");
-    if (!_description) return alert("No description provided");
-    if (!_url) return alert("No URL provided");
-    try {
-      await addDoc(ResourceListREF, {
-        title: _title,
-        description: _description,
-        url: _url,
-        userId: auth?.currentUser?.uid,
-      });
-      setTitle("");
-      setDescription("");
-      setUrl("");
-      getResourceList();
-    }catch (error) {
-      console.log(error);
-    }
-  };
-
   const deleteResource = async (id, creatorId) => {
     if (!auth?.currentUser) return alert("Please sign in to delete a resource");
     if (auth.currentUser.uid !== creatorId) return alert("You can only delete resources you created");
@@ -66,27 +42,7 @@ export const ResourceRender = () => {
 
   return (
     <div>
-      <div>
-        <input
-          type="text"
-          placeholder="Title of Resource..."
-          value={_title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Description of Resource..."
-          value={_description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="URL of Resource..."
-          value={_url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-        <button onClick={addResource}>Add Resource</button>
-      </div>
+      <ResourceAddition />
       <div>
         {resourceList.map((resource) => (
           <div key={resource.id}>
