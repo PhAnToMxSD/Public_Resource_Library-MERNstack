@@ -1,5 +1,5 @@
 import { db } from "../config/firebase.js";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export const ResourceRender = () => {
@@ -31,6 +31,9 @@ export const ResourceRender = () => {
   }, []);
 
   const addResource = async () => {
+    if (!_title) return alert("Untitled Resource");
+    if (!_description) return alert("No description provided");
+    if (!_url) return alert("No URL provided");
     try {
       await addDoc(ResourceListREF, {
         title: _title,
@@ -46,29 +49,36 @@ export const ResourceRender = () => {
     }
   };
 
+  const deleteResource = async (id) => {
+    try {
+        const resourceDoc = doc(db, "Resource", id);
+        await deleteDoc(resourceDoc);
+        getResourceList();
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
   return (
     <div>
       <div>
         <input
           type="text"
           placeholder="Title of Resource..."
-          onChange={(e) => {
-            setTitle(e.target.value == "" ? alert("Untitled Resource") : e.target.value);
-          }}
+          value={_title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type="text"
           placeholder="Description of Resource..."
-          onChange={(e) => {
-            setDescription(e.target.value == "" ? alert("No description provided") : e.target.value);
-          }}
+          value={_description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="text"
           placeholder="URL of Resource..."
-          onChange={(e) => {
-            setUrl(e.target.value == "" ? alert("No URL provided") : e.target.value);
-          }}
+          value={_url}
+          onChange={(e) => setUrl(e.target.value)}
         />
         <button onClick={addResource}>Add Resource</button>
       </div>
@@ -77,7 +87,10 @@ export const ResourceRender = () => {
           <div key={resource.id}>
             <h2>{resource.title}</h2>
             <p>{resource.description}</p>
-            <a href={resource.url}>{resource.url}</a>
+            <a href={resource.url} target="_blank" rel="noopener noreferrer">
+              {resource.url}
+            </a>
+            <button onClick={() => deleteResource(resource.id)}>Delete</button>
           </div>
         ))}
       </div>
