@@ -3,6 +3,7 @@ import { auth, provider } from "../config/firebase.js";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 
+
 export const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +24,7 @@ export const Auth = () => {
     }
   };
 
-  const buttonColor = 'bg-sky-500 hover:bg-sky-700 rounded-lg';
+  const buttonColor = "bg-sky-500 hover:bg-sky-700 rounded-lg";
 
   return (
     <div>
@@ -40,7 +41,10 @@ export const Auth = () => {
       <button className={buttonColor} onClick={signUp}>
         Click Me
       </button>
-      <button className="bg-sky-500 hover:bg-sky-700 rounded-lg hover:border-sky-700" onClick={signInWithGoogle}>
+      <button
+        className="bg-sky-500 hover:bg-sky-700 rounded-lg hover:border-sky-700"
+        onClick={signInWithGoogle}
+      >
         Sign in with Google
       </button>
     </div>
