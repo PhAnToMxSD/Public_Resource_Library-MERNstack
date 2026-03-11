@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div className="text-center flex flex-col justify-center items-center gap-4">
-      <h1 style = {stylere}>GasStation </h1>
-      <h2 style = {styler} >A Public Resource Library - by PhAnToMxSD</h2>
+      <h1 style = {stylere}>Gas_Station </h1>
+      <h2 style = {styler} >A Public Resource E-Library - by PhAnToMxSD</h2>
       <Auth />
       <hr style={{ border: "none", height: "14px", backgroundColor: "#2CD367", margin: "20px 0", width: "100vw" }} />
       <ResourceRender />

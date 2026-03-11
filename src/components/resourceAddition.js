@@ -35,7 +35,7 @@ export const ResourceAddition = ({ onResourceAdded }) => {
   };
 
   return (
-    <div className="flex flex-row justify-center items-center gap-4">
+    <div className="flex flex-col justify-center items-center gap-4">
       <input
         type="text"
         className="inputauth"
@@ -46,23 +46,23 @@ export const ResourceAddition = ({ onResourceAdded }) => {
       <input
         className="inputauth"
         type="text"
-        placeholder="Description of Resource..."
-        value={_description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        className="inputauth"
-        type="text"
         placeholder="Category of Resource..."
         value={_category}
         onChange={(e) => setCategory(e.target.value)}
       />
-      <input
-        className="inputauth"
+      <textarea
+        className="inputauthurl"
         type="text"
         placeholder="URL of Resource..."
         value={_url}
         onChange={(e) => setUrl(e.target.value)}
+      />
+      <textarea
+        className="inputauthdes"
+        placeholder="Description of Resource..."
+        value={_description}
+        onChange={(e) => setDescription(e.target.value)}
+        rows={4}
       />
       <button
         onClick={addResource}

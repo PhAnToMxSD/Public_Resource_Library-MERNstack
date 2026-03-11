@@ -1,7 +1,7 @@
 import { db, auth } from "../config/firebase.js";
 import { getDocs, collection, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { ResourceAddition } from "./resourceAddition.js";
+import { AddResourceButton } from "./addResourceButton.js";
 
 
 export const ResourceRender = () => {
@@ -40,13 +40,28 @@ export const ResourceRender = () => {
     }
   }
 
+  const resourceStyle = {
+    width : "30vw",
+    borderRadius: "10px",
+    margin: "30px",
+    border: "2px solid #2CD367",
+    backgroundColor: "#2CD367",
+    color: "white",
+    filter: "drop-shadow(0px 0px 8px green)",
+    fontFamily: '"Datatype", monospace',
+    fontSize: "20px",
+    fontWeight: 400,
+    fontStyle: "normal",
+    padding: "10px",
+  }
+
   return (
     <div>
-      <ResourceAddition onResourceAdded={getResourceList} />
+      <AddResourceButton />
       <hr style={{ border: "none", height: "14px", backgroundColor: "#2CD367", margin: "40px 20px", width: "100vw" }} />
       <div>
         {resourceList.map((resource) => (
-          <div key={resource.id} className="resource">
+          <div key={resource.id} style={resourceStyle}>
             <h2>{resource.title}</h2>
             <p>{resource.description}</p>
             <a href={resource.url} target="_blank" rel="noopener noreferrer">
