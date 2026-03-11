@@ -43,7 +43,7 @@ export const ResourceRender = () => {
   return (
     <div>
       <ResourceAddition onResourceAdded={getResourceList} />
-      <hr style={{ border: "none", height: "14px", backgroundColor: "#2CD367", margin: "40px 0", width: "100vw" }} />
+      <hr style={{ border: "none", height: "14px", backgroundColor: "#2CD367", margin: "40px 20px", width: "100vw" }} />
       <div>
         {resourceList.map((resource) => (
           <div key={resource.id} className="resource">

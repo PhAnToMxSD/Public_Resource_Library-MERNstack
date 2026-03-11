@@ -6,6 +6,8 @@ export const ResourceAddition = ({ onResourceAdded }) => {
   const [_title, setTitle] = useState("");
   const [_description, setDescription] = useState("");
   const [_url, setUrl] = useState("");
+  const [_category, setCategory] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   const ResourceListREF = collection(db, "Resource");
 
@@ -19,11 +21,13 @@ export const ResourceAddition = ({ onResourceAdded }) => {
         title: _title,
         description: _description,
         url: _url,
+        category: _category,
         userId: auth?.currentUser?.uid,
       });
       setTitle("");
       setDescription("");
       setUrl("");
+      setCategory("");
       if (onResourceAdded) onResourceAdded();
     } catch (error) {
       console.log(error);
@@ -49,24 +53,37 @@ export const ResourceAddition = ({ onResourceAdded }) => {
       <input
         className="inputauth"
         type="text"
+        placeholder="Category of Resource..."
+        value={_category}
+        onChange={(e) => setCategory(e.target.value)}
+      />
+      <input
+        className="inputauth"
+        type="text"
         placeholder="URL of Resource..."
         value={_url}
         onChange={(e) => setUrl(e.target.value)}
       />
-      <button onClick={addResource} style={
-        {
+      <button
+        onClick={addResource}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
           border: "3px solid #2CD367",
-          backgroundColor: "transparent",
-          color: "#2CD367",
+          backgroundColor: isHovered ? "#2CD367" : "transparent",
+          color: isHovered ? "white" : "#2CD367",
           filter: "drop-shadow(0px 0px 8px green)",
           fontFamily: '"Datatype", monospace',
           fontSize: "20px",
           fontWeight: 400,
           fontStyle: "normal",
           padding: "5px 20px",
-          cursor: "pointer"
-        }
-      }>Add Resource</button>
+          cursor: "pointer",
+          transition: "background-color 0.2s, color 0.2s",
+        }}
+      >
+        Add Resource
+      </button>
     </div>
   );
 };
