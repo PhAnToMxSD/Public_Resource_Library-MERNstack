@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+.blocker {
+  display: block;
+}
+
+.inputauth {
+  @apply w-72 border-3 border-green-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 text-white transparent;
+}
+
+.inputauth::placeholder {
+  color: white;
+  font-family: "Bitcount Prop Double", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
+.inputauthB {
+  @apply w-72 bg-green-500 hover:bg-green-900  text-black px-4 py-2 focus:outline-none focus:ring-2  focus:ring-green-500;
+}
+.inputauthC {
+  @apply w-72 bg-green-500 hover:bg-green-900  text-black px-4 py-2 focus:outline-none focus:ring-2  focus:ring-green-500;
+}
+.inputauthD {
+  @apply w-72 bg-red-500 hover:bg-red-900  text-black px-4 py-2 focus:outline-none focus:ring-2  focus:ring-red-500;
+}
