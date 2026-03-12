@@ -5,7 +5,7 @@ import { useState } from "react";
 export const AddResourceButton = ({ onResourceAdded }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  if (isClicked ) {
+  if (isClicked && auth?.currentUser!=null) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
         <ResourceAddition onResourceAdded={onResourceAdded} />

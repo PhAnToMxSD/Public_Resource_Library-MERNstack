@@ -25,6 +25,7 @@ export const ResourceAddition = ({ onResourceAdded }) => {
     if (!_title) return alert("Untitled Resource");
     if (!_description) return alert("No description provided");
     if (!_url) return alert("No URL provided");
+    if (!_category) return alert("No category provided");
     try {
       await addDoc(ResourceListREF, {
         title: _title,

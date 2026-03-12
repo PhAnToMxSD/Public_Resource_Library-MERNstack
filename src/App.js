@@ -5,7 +5,7 @@ function App() {
   const styler = {
     color: "#2CD367",
     filter: "drop-shadow(0px 0px 8px green)",
-    fontFamily: '"Datatype", monospace',
+     fontFamily: '"Bitcount Grid Double", system-ui',
     fontSize: "40px",
     fontWeight: 400,
     fontStyle: "normal",

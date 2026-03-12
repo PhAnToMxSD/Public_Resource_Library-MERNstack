@@ -2,12 +2,12 @@ import { db, auth } from "../config/firebase.js";
 import {
   getDocs,
   collection,
-  addDoc,
   deleteDoc,
   doc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { AddResourceButton } from "./addResourceButton.js";
+import { UpdateResourceButton } from "./updateResourceButton.js";
 
 export const ResourceRender = () => {
   const [resourceList, setResourceList] = useState([]);
@@ -90,7 +90,7 @@ export const ResourceRender = () => {
           marginLeft: "20px",
           gap: "10px",
           width: "100vw",
-          padding: "20px 0",
+          padding: "20px 0"
         }}
       >
         <input
@@ -112,7 +112,8 @@ export const ResourceRender = () => {
         <button
           className={showMyResources ? "inputauthD" : "inputauthC"}
           onClick={() => {
-            if (!auth?.currentUser) return alert("Please sign in to view your resources");
+            if (!auth?.currentUser)
+              return alert("Please sign in to view your resources");
             setShowMyResources(!showMyResources);
           }}
         >
@@ -147,9 +148,7 @@ export const ResourceRender = () => {
               <h2>Title:</h2>
               <h2>{resource.title}</h2>
               <p>Description:</p>
-              <textarea style={{ textAlign: "center", height: "30px" }}>
-                {resource.description}
-              </textarea>
+              <textarea style={{ textAlign: "center", height: "30px" }} value={resource.description} readOnly />
               <p>Category:</p>
               <p>{resource.category}</p>
               <p>URL:</p>
@@ -171,15 +170,7 @@ export const ResourceRender = () => {
               >
                 Copy URL
               </button>
-              <button
-                className="inputauthCDE"
-                onClick={() => {
-                  navigator.clipboard.writeText(resource.url);
-                  alert("URL copied to clipboard!");
-                }}
-              >
-                Update resource
-              </button>
+              <UpdateResourceButton onResourceUpdated={getResourceList} resourceId={resource.id} />
             </div>
           ))}
       </div>
