@@ -43,27 +43,27 @@ export const ResourceUpdation = ({ onResourceUpdated, resourceId }) => {
     <div className="flex flex-col justify-center items-center gap-4">
       <input
         type="text"
-        className="inputauth"
+        className="inputauthup"
         placeholder="Title of Resource..."
         value={_title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        className="inputauth"
+        className="inputauthup"
         type="text"
         placeholder="Category of Resource..."
         value={_category}
         onChange={(e) => setCategory(e.target.value)}
       />
       <textarea
-        className="inputauthurl"
+        className="inputauthurlup"
         type="text"
         placeholder="URL of Resource..."
         value={_url}
         onChange={(e) => setUrl(e.target.value)}
       />
       <textarea
-        className="inputauthdes"
+        className="inputauthdesup"
         placeholder="Description of Resource..."
         value={_description}
         onChange={(e) => setDescription(e.target.value)}

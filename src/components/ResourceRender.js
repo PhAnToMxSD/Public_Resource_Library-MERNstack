@@ -56,7 +56,7 @@ export const ResourceRender = () => {
     alignItems: "center",
     gap: "10px",
     padding: "20px",
-    width: "33vw",
+    width: "30vw",
     borderRadius: "10px",
     margin: "30px",
     border: "2px solid #2CD367",
@@ -129,7 +129,7 @@ export const ResourceRender = () => {
           width: "100vw",
         }}
       />
-      <div>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
         {resourceList
           .filter((resource) => {
             const matchesTitle = resource.title
@@ -152,9 +152,7 @@ export const ResourceRender = () => {
               <p>Category:</p>
               <p>{resource.category}</p>
               <p>URL:</p>
-              <a href={resource.url} target="_blank" rel="noopener noreferrer">
-                {resource.url}
-              </a>
+              <textarea style={{ textAlign: "center", height: "30px" }} value={resource.url} readOnly/>
               <button
                 className="inputauthD"
                 onClick={() => deleteResource(resource.id, resource.userId)}
