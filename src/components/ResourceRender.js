@@ -11,6 +11,8 @@ import { AddResourceButton } from "./addResourceButton.js";
 
 export const ResourceRender = () => {
   const [resourceList, setResourceList] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
 
   const ResourceListREF = collection(db, "Resource");
 
@@ -79,38 +81,83 @@ export const ResourceRender = () => {
           width: "100vw",
         }}
       />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+          width: "100vw",
+          padding: "20px 0",
+        }}
+      >
+        <input
+          className="inputauth"
+          type="text"
+          placeholder="Search by title..."
+          value={searchTitle}
+          onChange={(e) => setSearchTitle(e.target.value)}
+          style={{ flex: 1, maxWidth: "45vw" }}
+        />
+        <input
+          className="inputauth"
+          type="text"
+          placeholder="Search by category..."
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
+          style={{ flex: 1, maxWidth: "45vw" }}
+        />
+      </div>
+      <hr
+        style={{
+          border: "none",
+          height: "14px",
+          backgroundColor: "#2CD367",
+          margin: "40px 20px",
+          width: "100vw",
+        }}
+      />
       <div>
-        {resourceList.map((resource) => (
-          <div key={resource.id} style={resourceStyle}>
-            <h2>Title:</h2>
-            <h2>{resource.title}</h2>
-            <p>Description:</p>
-            <textarea style={{ textAlign: "center", height: "30px" }}>
-              {resource.description}
-            </textarea>
-            <p>Category:</p>
-            <p>{resource.category}</p>
-            <p>URL:</p>
-            <a href={resource.url} target="_blank" rel="noopener noreferrer">
-              {resource.url}
-            </a>
-            <button
-              className="inputauthD"
-              onClick={() => deleteResource(resource.id, resource.userId)}
-            >
-              Delete
-            </button>
-            <button
-              className="inputauthCD"
-              onClick={() => {
-                navigator.clipboard.writeText(resource.url);
-                alert("URL copied to clipboard!");
-              }}
-            >
-              Update Resource
-            </button>
-          </div>
-        ))}
+        {resourceList
+          .filter((resource) => {
+            const matchesTitle = resource.title
+              ?.toLowerCase()
+              .includes(searchTitle.toLowerCase());
+            const matchesCategory = resource.category
+              ?.toLowerCase()
+              .includes(searchCategory.toLowerCase());
+            return matchesTitle && matchesCategory;
+          })
+          .map((resource) => (
+            <div key={resource.id} style={resourceStyle}>
+              <h2>Title:</h2>
+              <h2>{resource.title}</h2>
+              <p>Description:</p>
+              <textarea style={{ textAlign: "center", height: "30px" }}>
+                {resource.description}
+              </textarea>
+              <p>Category:</p>
+              <p>{resource.category}</p>
+              <p>URL:</p>
+              <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                {resource.url}
+              </a>
+              <button
+                className="inputauthD"
+                onClick={() => deleteResource(resource.id, resource.userId)}
+              >
+                Delete
+              </button>
+              <button
+                className="inputauthCD"
+                onClick={() => {
+                  navigator.clipboard.writeText(resource.url);
+                  alert("URL copied to clipboard!");
+                }}
+              >
+                Update Resource
+              </button>
+            </div>
+          ))}
       </div>
     </div>
   );
