@@ -13,6 +13,7 @@ export const ResourceRender = () => {
   const [resourceList, setResourceList] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
+  const [showMyResources, setShowMyResources] = useState(false);
 
   const ResourceListREF = collection(db, "Resource");
 
@@ -106,6 +107,15 @@ export const ResourceRender = () => {
           onChange={(e) => setSearchCategory(e.target.value)}
           style={{ flex: 1, maxWidth: "45vw" }}
         />
+        <button
+          className={showMyResources ? "inputauthD" : "inputauthC"}
+          onClick={() => {
+            if (!auth?.currentUser) return alert("Please sign in to view your resources");
+            setShowMyResources(!showMyResources);
+          }}
+        >
+          {showMyResources ? "Show All" : "My Resources"}
+        </button>
       </div>
       <hr
         style={{
@@ -125,7 +135,10 @@ export const ResourceRender = () => {
             const matchesCategory = resource.category
               ?.toLowerCase()
               .includes(searchCategory.toLowerCase());
-            return matchesTitle && matchesCategory;
+            const matchesUser = showMyResources
+              ? resource.userId === auth?.currentUser?.uid
+              : true;
+            return matchesTitle && matchesCategory && matchesUser;
           })
           .map((resource) => (
             <div key={resource.id} style={resourceStyle}>
@@ -154,7 +167,7 @@ export const ResourceRender = () => {
                   alert("URL copied to clipboard!");
                 }}
               >
-                Update Resource
+                Copy URL
               </button>
             </div>
           ))}
