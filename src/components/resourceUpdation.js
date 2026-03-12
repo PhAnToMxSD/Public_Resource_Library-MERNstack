@@ -40,7 +40,7 @@ export const ResourceUpdation = ({ onResourceUpdated, resourceId }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
+    <div className="flex flex-col justify-center items-center gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <input
         type="text"
         className="inputauthup"

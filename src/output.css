@@ -175,14 +175,31 @@
   }
 }
 @layer utilities {
+  .absolute {
+    position: absolute;
+  }
   .start {
     inset-inline-start: var(--spacing);
+  }
+  .top-1\/2 {
+    top: calc(1 / 2 * 100%);
+  }
+  .left-1\/2 {
+    left: calc(1 / 2 * 100%);
   }
   .flex {
     display: flex;
   }
   .grow {
     flex-grow: 1;
+  }
+  .-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .flex-col {
     flex-direction: column;
@@ -241,7 +258,7 @@
   border-style: var(--tw-border-style);
   border-width: 3px;
   border-color: var(--color-green-400);
-  background-color: var(--color-pink-500);
+  background-color: var(--color-black);
   padding-inline: calc(var(--spacing) * 4);
   padding-block: calc(var(--spacing) * 2);
   color: var(--color-white);
@@ -264,7 +281,7 @@
   border-style: var(--tw-border-style);
   border-width: 3px;
   border-color: var(--color-green-400);
-  background-color: var(--color-pink-500);
+  background-color: var(--color-black);
   padding-inline: calc(var(--spacing) * 4);
   padding-block: calc(var(--spacing) * 2);
   color: var(--color-white);
@@ -287,7 +304,7 @@
   border-style: var(--tw-border-style);
   border-width: 3px;
   border-color: var(--color-green-400);
-  background-color: var(--color-pink-500);
+  background-color: var(--color-black);
   padding-inline: calc(var(--spacing) * 4);
   padding-block: calc(var(--spacing) * 2);
   color: var(--color-white);
@@ -488,6 +505,21 @@
     outline-style: none;
   }
 }
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -614,6 +646,9 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-border-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
