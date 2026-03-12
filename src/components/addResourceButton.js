@@ -1,10 +1,11 @@
+import { auth } from "../config/firebase";
 import { ResourceAddition } from "./resourceAddition";
 import { useState } from "react";
 
 export const AddResourceButton = ({ onResourceAdded }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  if (isClicked) {
+  if (isClicked ) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
         <ResourceAddition onResourceAdded={onResourceAdded} />

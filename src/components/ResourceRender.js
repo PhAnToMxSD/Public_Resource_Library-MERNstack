@@ -171,6 +171,15 @@ export const ResourceRender = () => {
               >
                 Copy URL
               </button>
+              <button
+                className="inputauthCDE"
+                onClick={() => {
+                  navigator.clipboard.writeText(resource.url);
+                  alert("URL copied to clipboard!");
+                }}
+              >
+                Update resource
+              </button>
             </div>
           ))}
       </div>
