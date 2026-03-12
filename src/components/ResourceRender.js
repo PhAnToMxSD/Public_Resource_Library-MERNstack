@@ -86,7 +86,9 @@ export const ResourceRender = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "20px",
+          justifyContent: "space-around",
+          marginLeft: "20px",
+          gap: "10px",
           width: "100vw",
           padding: "20px 0",
         }}
