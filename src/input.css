@@ -8,11 +8,11 @@
   @apply w-72 border-3 border-green-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 text-white bg-transparent;
 }
 
-.inputauthdes{
+.inputauthdes {
   @apply w-200 h-40 border-3 border-green-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 text-white bg-transparent resize-y;
 }
 
-.inputauthurl{
+.inputauthurl {
   @apply w-150 h-20 border-3 border-green-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 text-white bg-transparent resize-y;
 }
 
@@ -64,4 +64,3 @@
 .inputauthCD {
   @apply w-72 bg-yellow-500 hover:bg-yellow-900  text-black px-4 py-2  focus:outline-none focus:ring-2  focus:ring-yellow-500;
 }
-

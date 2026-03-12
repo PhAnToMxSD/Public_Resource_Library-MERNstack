@@ -11,11 +11,12 @@ export const ResourceAddition = ({ onResourceAdded }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   if (isClicked) {
-    return <div>
-      <AddResourceButton onResourceAdded={onResourceAdded} />
-    </div>;
+    return (
+      <div>
+        <AddResourceButton onResourceAdded={onResourceAdded} />
+      </div>
+    );
   }
-
 
   const ResourceListREF = collection(db, "Resource");
 

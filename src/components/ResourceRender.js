@@ -85,7 +85,9 @@ export const ResourceRender = () => {
             <h2>Title:</h2>
             <h2>{resource.title}</h2>
             <p>Description:</p>
-            <textarea style={{textAlign: "center",height: "30px"}}>{resource.description}</textarea>
+            <textarea style={{ textAlign: "center", height: "30px" }}>
+              {resource.description}
+            </textarea>
             <p>Category:</p>
             <p>{resource.category}</p>
             <p>URL:</p>
