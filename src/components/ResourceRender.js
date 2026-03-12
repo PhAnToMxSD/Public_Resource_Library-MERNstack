@@ -1,8 +1,13 @@
 import { db, auth } from "../config/firebase.js";
-import { getDocs, collection, addDoc, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { AddResourceButton } from "./addResourceButton.js";
-
 
 export const ResourceRender = () => {
   const [resourceList, setResourceList] = useState([]);
@@ -30,18 +35,25 @@ export const ResourceRender = () => {
 
   const deleteResource = async (id, creatorId) => {
     if (!auth?.currentUser) return alert("Please sign in to delete a resource");
-    if (auth.currentUser.uid !== creatorId) return alert("You can only delete resources you created");
+    if (auth.currentUser.uid !== creatorId)
+      return alert("You can only delete resources you created");
     try {
-        const resourceDoc = doc(db, "Resource", id);
-        await deleteDoc(resourceDoc);
-        getResourceList();
+      const resourceDoc = doc(db, "Resource", id);
+      await deleteDoc(resourceDoc);
+      getResourceList();
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
-  }
+  };
 
   const resourceStyle = {
-    width : "30vw",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "10px",
+    padding: "20px",
+    width: "33vw",
     borderRadius: "10px",
     margin: "30px",
     border: "2px solid #2CD367",
@@ -53,21 +65,48 @@ export const ResourceRender = () => {
     fontWeight: 400,
     fontStyle: "normal",
     padding: "10px",
-  }
+  };
 
   return (
     <div>
-      <AddResourceButton />
-      <hr style={{ border: "none", height: "14px", backgroundColor: "#2CD367", margin: "40px 20px", width: "100vw" }} />
+      <AddResourceButton onResourceAdded={getResourceList} />
+      <hr
+        style={{
+          border: "none",
+          height: "14px",
+          backgroundColor: "#2CD367",
+          margin: "40px 20px",
+          width: "100vw",
+        }}
+      />
       <div>
         {resourceList.map((resource) => (
           <div key={resource.id} style={resourceStyle}>
+            <h2>Title:</h2>
             <h2>{resource.title}</h2>
-            <p>{resource.description}</p>
+            <p>Description:</p>
+            <textarea style={{textAlign: "center",height: "30px"}}>{resource.description}</textarea>
+            <p>Category:</p>
+            <p>{resource.category}</p>
+            <p>URL:</p>
             <a href={resource.url} target="_blank" rel="noopener noreferrer">
               {resource.url}
             </a>
-            <button onClick={() => deleteResource(resource.id, resource.userId)}>Delete</button>
+            <button
+              className="inputauthD"
+              onClick={() => deleteResource(resource.id, resource.userId)}
+            >
+              Delete
+            </button>
+            <button
+              className="inputauthCD"
+              onClick={() => {
+                navigator.clipboard.writeText(resource.url);
+                alert("URL copied to clipboard!");
+              }}
+            >
+              Update Resource
+            </button>
           </div>
         ))}
       </div>

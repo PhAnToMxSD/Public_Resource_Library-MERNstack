@@ -1,6 +1,7 @@
 import { db, auth } from "../config/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
+import { AddResourceButton } from "./addResourceButton.js";
 
 export const ResourceAddition = ({ onResourceAdded }) => {
   const [_title, setTitle] = useState("");
@@ -8,6 +9,13 @@ export const ResourceAddition = ({ onResourceAdded }) => {
   const [_url, setUrl] = useState("");
   const [_category, setCategory] = useState("");
   const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  if (isClicked) {
+    return <div>
+      <AddResourceButton onResourceAdded={onResourceAdded} />
+    </div>;
+  }
+
 
   const ResourceListREF = collection(db, "Resource");
 
@@ -28,6 +36,7 @@ export const ResourceAddition = ({ onResourceAdded }) => {
       setDescription("");
       setUrl("");
       setCategory("");
+      setIsClicked(true);
       if (onResourceAdded) onResourceAdded();
     } catch (error) {
       console.log(error);

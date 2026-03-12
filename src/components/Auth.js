@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, provider } from "../config/firebase.js";
 import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
 
-import { ResourceAddition } from "./resourceAddition.js";
 
 export const Auth = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => async () => {
+    try {
+      await signOut(auth);
+      setIsSignedIn(false);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
 
   const signInWithGoogle = async () => {
     try {
