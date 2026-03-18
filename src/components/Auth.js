@@ -36,9 +36,9 @@ export const Auth = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
+    <div className="auth-wrap">
       <button
-        className={isSignedIn ? "inputauthD" : "inputauthC"}
+        className={isSignedIn ? "btn-danger" : "btn-primary"}
         onClick={
           isSignedIn
             ? () => {

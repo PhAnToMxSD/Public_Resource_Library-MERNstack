@@ -49,68 +49,27 @@ export const ResourceRender = () => {
     }
   };
 
-  const resourceStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "10px",
-    padding: "20px",
-    width: "30vw",
-    borderRadius: "10px",
-    margin: "30px",
-    border: "2px solid #2CD367",
-    backgroundColor: "#2CD367",
-    color: "white",
-    filter: "drop-shadow(0px 0px 8px green)",
-    fontFamily: '"Datatype", monospace',
-    fontSize: "20px",
-    fontWeight: 400,
-    fontStyle: "normal",
-    padding: "10px",
-  };
-
   return (
-    <div>
+    <div className="resource-section">
       <AddResourceButton onResourceAdded={getResourceList} />
-      <hr
-        style={{
-          border: "none",
-          height: "14px",
-          backgroundColor: "#2CD367",
-          margin: "40px 20px",
-          width: "100vw",
-        }}
-      />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          justifyContent: "space-around",
-          marginLeft: "20px",
-          gap: "10px",
-          width: "100vw",
-          padding: "20px 0"
-        }}
-      >
+      <div className="section-divider" />
+      <div className="surface-panel search-panel">
         <input
-          className="inputauth"
+          className="ui-input"
           type="text"
           placeholder="Search by title..."
           value={searchTitle}
           onChange={(e) => setSearchTitle(e.target.value)}
-          style={{ flex: 1, maxWidth: "45vw" }}
         />
         <input
-          className="inputauth"
+          className="ui-input"
           type="text"
           placeholder="Search by category..."
           value={searchCategory}
           onChange={(e) => setSearchCategory(e.target.value)}
-          style={{ flex: 1, maxWidth: "45vw" }}
         />
         <button
-          className={showMyResources ? "inputauthD" : "inputauthC"}
+          className={showMyResources ? "btn-danger" : "btn-primary"}
           onClick={() => {
             if (!auth?.currentUser)
               return alert("Please sign in to view your resources");
@@ -120,57 +79,69 @@ export const ResourceRender = () => {
           {showMyResources ? "Show All" : "My Resources"}
         </button>
       </div>
-      <hr
-        style={{
-          border: "none",
-          height: "14px",
-          backgroundColor: "#2CD367",
-          margin: "40px 20px",
-          width: "100vw",
-        }}
-      />
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <div className="section-divider" />
+      <div className="resource-grid">
         {resourceList
           .filter((resource) => {
-            const matchesTitle = resource.title
-              ?.toLowerCase()
-              .includes(searchTitle.toLowerCase());
-            const matchesCategory = resource.category
-              ?.toLowerCase()
-              .includes(searchCategory.toLowerCase());
+            const title = (resource.title || "").toLowerCase();
+            const category = (resource.category || "").toLowerCase();
+            const matchesTitle = title.includes(searchTitle.toLowerCase());
+            const matchesCategory = category.includes(searchCategory.toLowerCase());
             const matchesUser = showMyResources
               ? resource.userId === auth?.currentUser?.uid
               : true;
             return matchesTitle && matchesCategory && matchesUser;
           })
-          .map((resource) => (
-            <div key={resource.id} style={resourceStyle}>
-              <h2>Title:</h2>
-              <h2>{resource.title}</h2>
-              <p>Description:</p>
-              <textarea style={{ textAlign: "center", height: "30px" }} value={resource.description} readOnly />
-              <p>Category:</p>
-              <p>{resource.category}</p>
-              <p>URL:</p>
-              <textarea style={{ textAlign: "center", height: "30px" }} value={resource.url} readOnly/>
-              <button
-                className="inputauthD"
-                onClick={() => deleteResource(resource.id, resource.userId)}
-              >
-                Delete
-              </button>
-              <button
-                className="inputauthCD"
-                onClick={() => {
-                  navigator.clipboard.writeText(resource.url);
-                  alert("URL copied to clipboard!");
-                }}
-              >
-                Copy URL
-              </button>
-              <UpdateResourceButton onResourceUpdated={getResourceList} resourceId={resource.id} />
-            </div>
-          ))}
+          .map((resource) => {
+            const creatorTag =
+              resource.userId === auth?.currentUser?.uid ? "Your upload" : "Community";
+
+            return (
+              <article key={resource.id} className="resource-card">
+                <div className="card-header-row">
+                  <span className="card-badge">{resource.category || "General"}</span>
+                  <span className="card-meta">{creatorTag}</span>
+                </div>
+
+                <h3 className="card-title">{resource.title || "Untitled"}</h3>
+
+                <p className="card-label">Description</p>
+                <p className="card-content">{resource.description || "No description provided."}</p>
+
+                <p className="card-label">URL</p>
+                <a
+                  href={resource.url}
+                  className="card-link"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {resource.url}
+                </a>
+
+                <div className="card-actions">
+                  <button
+                    className="btn-danger"
+                    onClick={() => deleteResource(resource.id, resource.userId)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="btn-warning"
+                    onClick={() => {
+                      navigator.clipboard.writeText(resource.url);
+                      alert("URL copied to clipboard!");
+                    }}
+                  >
+                    Copy URL
+                  </button>
+                  <UpdateResourceButton
+                    onResourceUpdated={getResourceList}
+                    resourceId={resource.id}
+                  />
+                </div>
+              </article>
+            );
+          })}
       </div>
     </div>
   );

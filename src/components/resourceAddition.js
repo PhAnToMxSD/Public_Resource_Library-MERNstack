@@ -8,7 +8,6 @@ export const ResourceAddition = ({ onResourceAdded }) => {
   const [_description, setDescription] = useState("");
   const [_url, setUrl] = useState("");
   const [_category, setCategory] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   if (isClicked) {
     return (
@@ -46,53 +45,37 @@ export const ResourceAddition = ({ onResourceAdded }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
+    <div className="surface-panel form-panel">
+      <h3 className="panel-title">Add New Resource</h3>
       <input
         type="text"
-        className="inputauth"
+        className="ui-input"
         placeholder="Title of Resource..."
         value={_title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        className="inputauth"
+        className="ui-input"
         type="text"
         placeholder="Category of Resource..."
         value={_category}
         onChange={(e) => setCategory(e.target.value)}
       />
       <textarea
-        className="inputauthurl"
+        className="ui-textarea"
         type="text"
         placeholder="URL of Resource..."
         value={_url}
         onChange={(e) => setUrl(e.target.value)}
       />
       <textarea
-        className="inputauthdes"
+        className="ui-textarea ui-textarea-lg"
         placeholder="Description of Resource..."
         value={_description}
         onChange={(e) => setDescription(e.target.value)}
         rows={4}
       />
-      <button
-        onClick={addResource}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{
-          border: "3px solid #2CD367",
-          backgroundColor: isHovered ? "#2CD367" : "transparent",
-          color: isHovered ? "white" : "#2CD367",
-          filter: "drop-shadow(0px 0px 8px green)",
-          fontFamily: '"Datatype", monospace',
-          fontSize: "20px",
-          fontWeight: 400,
-          fontStyle: "normal",
-          padding: "5px 20px",
-          cursor: "pointer",
-          transition: "background-color 0.2s, color 0.2s",
-        }}
-      >
+      <button onClick={addResource} className="btn-primary">
         Add Resource
       </button>
     </div>

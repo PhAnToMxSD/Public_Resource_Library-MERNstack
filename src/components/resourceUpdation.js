@@ -40,30 +40,31 @@ export const ResourceUpdation = ({ onResourceUpdated, resourceId }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="surface-panel form-panel update-panel">
+      <h3 className="panel-title">Update Resource</h3>
       <input
         type="text"
-        className="inputauthup"
+        className="ui-input"
         placeholder="Title of Resource..."
         value={_title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        className="inputauthup"
+        className="ui-input"
         type="text"
         placeholder="Category of Resource..."
         value={_category}
         onChange={(e) => setCategory(e.target.value)}
       />
       <textarea
-        className="inputauthurlup"
+        className="ui-textarea"
         type="text"
         placeholder="URL of Resource..."
         value={_url}
         onChange={(e) => setUrl(e.target.value)}
       />
       <textarea
-        className="inputauthdesup"
+        className="ui-textarea ui-textarea-lg"
         placeholder="Description of Resource..."
         value={_description}
         onChange={(e) => setDescription(e.target.value)}
@@ -71,7 +72,7 @@ export const ResourceUpdation = ({ onResourceUpdated, resourceId }) => {
       />
       <button
         onClick={() => updateResource(_title, _description, _url, _category)}
-        className="inputauthC"
+        className="btn-primary"
       >
         Update Resource
       </button>
