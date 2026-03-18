@@ -6,4 +6,4 @@ This website has the following features :-
 2. People can keep a track of the resources that they have uploaded to the E-library. 
 3. People can search for specific resources and have access to them. They can search for resources in two ways - {For specific resource - by entering the name} or {By selecting a category of resources}
 
-*The deployed link contains hadnwritten css styling. I haven't yet deployed the commit with the css styling by AI*
+*The deployed link contains handwritten css styling. I haven't yet deployed the commit with the css styling by AI*
